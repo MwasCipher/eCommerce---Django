@@ -1,0 +1,33 @@
+  <!-- Listings Template -->
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+               {% if product.image %}
+                    <img src="{{product.image.url}}" alt="{{product.title}}'s image" class="card-img-top"><br><br>
+                {% endif %}
+            <!--<img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">-->
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white">${{ product.price }}</span>
+              </h2>
+            </div>
+            <div class="card-body">
+             <p class="card-text">{{ product.description | truncatewords:14}}</p>
+
+              <div class="row py-2 text-secondary">
+                <div class="col-12">
+                  <i class="fas fa-clock"></i> {{ product.timestamp | timesince }} ago</div>
+              </div>
+
+              <hr>
+                <div class="row">
+                    <div class="col-6 col-md-6">
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-block">More Info</a>
+                    </div>
+                    <div class="col-4 col-md-6">
+                        {% include 'products/snippets/update_cart.html' with product=product cart=cart %}
+                    </div>
+                </div>
+
+            </div>
+          </div>
+        </div>

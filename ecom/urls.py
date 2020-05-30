@@ -13,9 +13,41 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
+
+# from products.views import (ProductListView,
+#                             product_list_view,
+#                             product_detail_view,
+#                             ProductDetailView,
+#                             ProductDetailSlugView,
+#                             ProductFeaturedListView,
+#                             ProductFeaturedDetailView
+#                             )
+
+
+from .views import home_page, about_page, contact_page
+from addresses.views import checkout_address_create_view, checkout_address_reuse_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^products/', include('products.urls')),
+    url(r'^search/', include('search.urls')),
+    url(r'^cart/', include('carts.urls')),
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^$', home_page, name='index'),
+    url(r'^about/$', about_page, name='about'),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^contact/$', contact_page, name='contact'),
+    url(r'^checkout/address/create/$', checkout_address_create_view, name='checkout_address_create'),
+    url(r'^checkout/address/reuse/$', checkout_address_reuse_view, name='checkout_address_reuse'),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

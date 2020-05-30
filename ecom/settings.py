@@ -37,7 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Project Apps
+    'products',
+    'search',
+    'tags',
+    'carts',
+    'orders',
+    'accounts',
+    'billing',
+    'addresses',
+    'analytics',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +67,7 @@ ROOT_URLCONF = 'ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +88,11 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newecomdb',
+        'USER': 'postgres',
+        'PASSWORD': '_Cipher96',
+        'HOST': 'localhost'
     }
 }
 
@@ -117,4 +133,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'ecom/static')  # The Project's Static
+
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_my_project'),  # Where i store My own Custom CSS, JS, Images...
+                                                  # Found in My Project's Directory
+]
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'ecom/media')
