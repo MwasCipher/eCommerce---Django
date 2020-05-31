@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^cart/', include('carts.urls')),
+    url(r'^billing/', include('billing.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^$', home_page, name='index'),
     url(r'^about/$', about_page, name='about'),
