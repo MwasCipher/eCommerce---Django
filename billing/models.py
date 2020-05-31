@@ -5,6 +5,7 @@ from django.db.models.signals import pre_save, post_save
 # Create your models here.
 from accounts.models import GuestEmail
 import stripe
+
 User = settings.AUTH_USER_MODEL
 
 stripe.api_key = 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ'
@@ -40,6 +41,18 @@ class BillingProfile(models.Model):
 
     def __str__(self):
         return self.email
+
+
+def billing_profile_created_receiver(instance, sender, *args, **kwargs):
+    if not instance.customer_id and instance.email:
+        customer = stripe.Customer.create(
+            email=instance.email
+        )
+        instance.customer_id = customer.id
+        print(customer)
+
+
+pre_save.connect(billing_profile_created_receiver, sender=BillingProfile)
 
 
 def user_created_receiver(instance, created, sender, *args, **kwargs):

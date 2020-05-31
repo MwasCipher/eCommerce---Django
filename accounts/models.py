@@ -11,8 +11,7 @@ class UserManager(BaseUserManager):
             raise ValueError('User Must Have A Working Email Address!!!')
         if not password:
             raise ValueError('Password is Required')
-        if not full_name:
-            raise ValueError('User Must Enter Full Name!!!')
+
         user_object = self.model(
             email=self.normalize_email(email),
             full_name=full_name
