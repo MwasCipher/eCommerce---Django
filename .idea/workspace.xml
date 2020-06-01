@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f35b5f-d5e3-4b25-808f-6159d4c902ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/base/js.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="53" lean-forward="true" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+            <state relative-caret-position="120">
+              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/billing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="75">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -36,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing/templates/stripe_payment.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -48,7 +48,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
+            <state relative-caret-position="45">
               <caret line="6" column="60" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="60" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -110,12 +110,12 @@
         <option value="$PROJECT_DIR$/static_my_project/js/stripe.js" />
         <option value="$PROJECT_DIR$/billing/templates/stripe_card_details_form.html" />
         <option value="$PROJECT_DIR$/billing/templates/stripe_card_element_form.html" />
-        <option value="$PROJECT_DIR$/billing/views.py" />
         <option value="$PROJECT_DIR$/templates/base/css.html" />
         <option value="$PROJECT_DIR$/ecom/urls.py" />
         <option value="$PROJECT_DIR$/billing/urls.py" />
         <option value="$PROJECT_DIR$/billing/templates/stripe_payment.html" />
         <option value="$PROJECT_DIR$/templates/base/js.html" />
+        <option value="$PROJECT_DIR$/billing/views.py" />
       </list>
     </option>
   </component>
@@ -235,9 +235,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24944155" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24944155" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -248,7 +247,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32956383" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32956383" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -545,33 +544,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/templates/stripe_card_element_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="16" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="53" lean-forward="true" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/templates/stripe_card_element_form.html" />
     <entry file="file://$PROJECT_DIR$/static_my_project/css/stripe.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -610,9 +583,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/billing/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/billing/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="45">
           <caret line="6" column="60" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="60" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -624,6 +607,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="74" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
