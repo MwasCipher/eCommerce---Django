@@ -2,7 +2,8 @@ from django.shortcuts import render
 import stripe
 
 # Create your views here.
-STRIPE_PUBLIC_KEY = ''
+STRIPE_PUBLIC_KEY = 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU'
+'
 stripe.api_key = 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ'
 
 
