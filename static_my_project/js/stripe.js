@@ -80,11 +80,10 @@ function stripeTokenHandler(nextUrl, token) {
         url: paymentMethodEndPoint,
         method: 'POST',
         success: function(data){
-            console.log(data)
+            card.clear()
             if(nextUrl){
                 window.location.href = nextUrl
             }
-            card.clear()
         },
         error: function(error){
             console.log(error)
