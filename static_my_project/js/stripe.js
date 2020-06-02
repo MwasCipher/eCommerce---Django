@@ -65,11 +65,11 @@ form.addEventListener('submit', function(event) {
   });
 });
 
-function redirectToNext(nextpath){
+function redirectToNext(nextpath, timeOffSet){
     if(nextpath){
         setTimeout(function(){
             window.location.href = nextpath
-        }, 1500)
+        }, timeOffSet)
     }
 }
 
@@ -91,7 +91,7 @@ function stripeTokenHandler(nextUrl, token) {
             var successMessage = data.message || 'Success, Card Added Successfully'
             card.clear()
             if(nextUrl){
-                window.location.href = nextUrl
+                successMessage = successMessage + "<b> <i class = 'fa fa-spin fa fa-spinner'> </i> Redirecting..."
             }
             if ($.alert){
                 $.alert(successMessage)
@@ -99,7 +99,7 @@ function stripeTokenHandler(nextUrl, token) {
             }else{
                 alert(successMessage)
             }
-            redirectToNext(nextUrl)
+            redirectToNext(nextUrl, 1500)
         },
         error: function(error){
             console.log(error)
