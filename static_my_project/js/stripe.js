@@ -83,9 +83,8 @@ function stripeTokenHandler(nextUrl, token) {
             console.log(data)
             if(nextUrl){
                 window.location.href = nextUrl
-            }else{
-                window.location.reload()
             }
+            card.clear()
         },
         error: function(error){
             console.log(error)

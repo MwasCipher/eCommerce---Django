@@ -12,13 +12,14 @@ stripe.api_key = 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ'
 
 def stripe_payment_view(request):
 
+    next_url = None
     next_ = request.GET.get('next')
-
-    if is_safe_url(next_, request.get_host()):
-        return redirect(next_)
+    if next_url:
+        next_url = next_
 
     context = {
         'public_key': STRIPE_PUBLIC_KEY,
+        'next_url': next_url,
 
     }
     if request.method == 'POST':

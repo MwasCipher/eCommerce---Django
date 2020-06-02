@@ -1,11 +1,15 @@
 $(document).ready(function(){
 
 var paymentForm = $('.payment-form')
+
 if (paymentForm == 1){
+
+var pubKey = paymentForm.attr('data-token')
+var nextUrl = paymentForm.attr('data-next-url')
 
 
 // Create a Stripe client.
-var stripe = Stripe('pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU');
+var stripe = Stripe(pubKey);
 
 // Create an instance of Elements.
 var elements = stripe.elements();
@@ -56,13 +60,39 @@ form.addEventListener('submit', function(event) {
       errorElement.textContent = result.error.message;
     } else {
       // Send the token to your server.
-      stripeTokenHandler(result.token);
+      stripeTokenHandler(nextUrl, result.token);
     }
   });
 });
 
 // Submit the form with the token ID.
-function stripeTokenHandler(token) {
+function stripeTokenHandler(nextUrl, token) {
+
+    var paymentMethodEndPoint = '/stripe/create'
+
+    var data = {
+        'token': token.id
+
+    }
+
+    $.ajax({
+        data: data,
+        url: paymentMethodEndPoint,
+        method: 'POST',
+        success: function(data){
+            console.log(data)
+            if(nextUrl){
+                window.location.href = nextUrl
+            }
+            card.clear()
+        },
+        error: function(error){
+            console.log(error)
+        }
+
+
+    })
+
   // Insert the token ID into the form so it gets submitted to the server
   var form = document.getElementById('payment-form');
   var hiddenInput = document.createElement('input');
