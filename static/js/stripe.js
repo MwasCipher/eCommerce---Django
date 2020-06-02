@@ -65,6 +65,14 @@ form.addEventListener('submit', function(event) {
   });
 });
 
+function redirectToNext(nextpath){
+    if(nextpath){
+        setTimeout(function(){
+            window.location.href = nextpath
+        }, 1500)
+    }
+}
+
 // Submit the form with the token ID.
 function stripeTokenHandler(nextUrl, token) {
 
@@ -87,17 +95,11 @@ function stripeTokenHandler(nextUrl, token) {
             }
             if ($.alert){
                 $.alert(successMessage)
-                if(nextUrl){
-                    setTimeout(function(){
-                        window.location.href = nextUrl
-                    }, 1500)
-            }
+                redirectToNext(nextUrl)
 
             }else{
                 alert(successMessage)
-                if(nextUrl){
-                    window.location.href = nextUrl
-            }
+                redirectToNext(nextUrl)
             }
         },
         error: function(error){
