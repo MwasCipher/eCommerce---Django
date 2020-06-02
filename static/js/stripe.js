@@ -88,7 +88,9 @@ function stripeTokenHandler(nextUrl, token) {
             if ($.alert){
                 $.alert(successMessage)
                 if(nextUrl){
-                    window.location.href = nextUrl
+                    setTimeout(function(){
+                        window.location.href = nextUrl
+                    }, 1500)
             }
 
             }else{
