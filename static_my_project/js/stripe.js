@@ -1,11 +1,14 @@
 $(document).ready(function(){
 
 var paymentForm = $('.payment-form')
+
 if (paymentForm == 1){
+
+var pubKey = paymentForm.attr('data-token')
 
 
 // Create a Stripe client.
-var stripe = Stripe('pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU');
+var stripe = Stripe(pubKey);
 
 // Create an instance of Elements.
 var elements = stripe.elements();
