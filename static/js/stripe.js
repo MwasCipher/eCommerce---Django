@@ -95,12 +95,11 @@ function stripeTokenHandler(nextUrl, token) {
             }
             if ($.alert){
                 $.alert(successMessage)
-                redirectToNext(nextUrl)
 
             }else{
                 alert(successMessage)
-                redirectToNext(nextUrl)
             }
+            redirectToNext(nextUrl)
         },
         error: function(error){
             console.log(error)
