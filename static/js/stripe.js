@@ -80,9 +80,22 @@ function stripeTokenHandler(nextUrl, token) {
         url: paymentMethodEndPoint,
         method: 'POST',
         success: function(data){
+            var successMessage = data.message || 'Success, Card Added Successfully'
             card.clear()
             if(nextUrl){
                 window.location.href = nextUrl
+            }
+            if ($.alert){
+                $.alert(successMessage)
+                if(nextUrl){
+                    window.location.href = nextUrl
+            }
+
+            }else{
+                alert(successMessage)
+                if(nextUrl){
+                    window.location.href = nextUrl
+            }
             }
         },
         error: function(error){

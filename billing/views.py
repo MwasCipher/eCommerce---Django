@@ -34,5 +34,5 @@ def create_payment(request):
     }
     if request.method == 'POST' and request.is_ajax():
         print(request.POST)
-        return JsonResponse({'message': 'Done'})
+        return JsonResponse({'message': 'Success, Card Added Successfully'})
     return HttpResponse('Error', status=401)
