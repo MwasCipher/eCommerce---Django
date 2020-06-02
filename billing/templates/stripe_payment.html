@@ -1,15 +1,18 @@
 {% extends 'base/base.html' %}
+{% load static %}
+<script src="{% static 'js/stripe.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/stripe.css' %}">
 
 {% block content %}
 
 
+<div class="col-12 col-md-6 mx-auto my-3">
+    <h4>Enter Debit/Credit Card Details</h4>
 
-<form action="/charge" method="post" id="payment-form" class="form-control">
+    <form action="/charge" method="post" id="payment-form" >
     <div class="form-row">
-        <label for="card-element">
-            Credit or debit card
-        </label>
-        <div id="card-element">
+
+        <div class="form-control" id="card-element">
             <!-- A Stripe Element will be inserted here. -->
         </div>
 
@@ -17,8 +20,11 @@
         <div id="card-errors" role="alert"></div>
     </div>
 
-    <button>Submit Payment</button>
+    <button class="btn btn-primary my-3">Submit Card Details</button>
 </form>
+
+</div>
+
 
 
 

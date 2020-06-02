@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 // Create a Stripe client.
 var stripe = Stripe('pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU');
 
@@ -68,3 +70,5 @@ function stripeTokenHandler(token) {
   // Submit the form
   form.submit();
 }
+
+})
