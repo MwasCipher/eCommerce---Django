@@ -91,7 +91,7 @@ function stripeTokenHandler(nextUrl, token) {
             var successMessage = data.message || 'Success, Card Added Successfully'
             card.clear()
             if(nextUrl){
-                successMessage = successMessage + "<b> <i class = 'fa fa-spin fa fa-spinner'> </i> Redirecting..."
+                successMessage = successMessage + "<br/><br/> <i class = 'fa fa-spin fa fa-spinner'> </i> Redirecting..."
             }
             if ($.alert){
                 $.alert(successMessage)
