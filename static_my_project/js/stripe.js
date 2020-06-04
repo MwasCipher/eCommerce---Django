@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+var stripeFormModule = $('.stripe-payment-form')
+var stripeTemplate = $.templates('#stripeTemplate')
+var stripeTemplateDataContext = {
+
+    name:'Stripe'
+
+}
+var stripeTemplateHtml = stripeTemplate.render(stripeTemplateDataContext)
+stripeFormModule.html(stripeTemplateHtml)
+
 var paymentForm = $('.payment-form')
 
 if (paymentForm == 1){
