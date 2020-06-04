@@ -1,10 +1,14 @@
 $(document).ready(function(){
 
 var stripeFormModule = $('.stripe-payment-form')
+var stripeModuleToken = stripeFormModule.attr('data-token')
+var stripeModuleNextUrl = stripeFormModule.attr('data-next-url')
 var stripeTemplate = $.templates('#stripeTemplate')
 var stripeTemplateDataContext = {
 
-    name:'Stripe'
+    name:'Stripe',
+    nextUrl:stripeModuleNextUrl,
+    publicKey:stripeModuleToken
 
 }
 var stripeTemplateHtml = stripeTemplate.render(stripeTemplateDataContext)

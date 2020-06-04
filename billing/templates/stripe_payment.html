@@ -5,39 +5,22 @@
 
 
 <script src="https://js.stripe.com/v3/"></script>
-<div class="stripe-payment-form" data-token="{{ public_key }}" data-next-url = "{{ next_url }}" >
+<div class="col-10 col-md-6 mx-auto">
+    <h2>Debit/Credit Card Details</h2>
 
-</div>
-<div class="col-12 col-md-6 mx-auto my-3">
-    <h4>Debit/Credit Card Details</h4>
+    <div class="stripe-payment-form" data-token="{{ public_key }}" data-next-url="{{ next_url }}">
 
-    <form class="payment-form" action="/charge" data-next-url = "{{ next_url }}" method="post" id="payment-form" data-token="{{ public_key }}">
-    <div class="form-row">
-
-        <div class="form-control" id="card-element">
-            <!-- A Stripe Element will be inserted here. -->
-        </div>
-
-        <!-- Used to display form errors. -->
-        <div id="card-errors" role="alert"></div>
     </div>
 
-    <button class="btn btn-primary my-3">Submit Card Details</button>
-</form>
-
 </div>
+
+
 
 {% endblock %}
 
 {% block jsrender %}
 
-{% verbatim %}
-
-<script id="stripeTemplate" type="text/x-jsrender">
-    Name:{{:name}}
-</script>
-
-{% endverbatim %}
+{% include 'stripe_jsrender_form.html' %}
 
 {% endblock %}
 
