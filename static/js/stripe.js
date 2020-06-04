@@ -3,7 +3,7 @@ $(document).ready(function(){
 var stripeFormModule = $('.stripe-payment-form')
 var stripeModuleToken = stripeFormModule.attr('data-token')
 var stripeModuleNextUrl = stripeFormModule.attr('data-next-url')
-var stripeModuleButtonTitle = stripeFormModule.attr('btn-title') || 'Add Card'
+var stripeModuleButtonTitle = stripeFormModule.attr('btn-title') || 'Submit Card Details'
 var stripeTemplate = $.templates('#stripeTemplate')
 var stripeTemplateDataContext = {
 
