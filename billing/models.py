@@ -61,3 +61,32 @@ def user_created_receiver(instance, created, sender, *args, **kwargs):
 
 
 post_save.connect(user_created_receiver, sender=User)
+
+
+class CardManager(models.Manager):
+    def add_new_card(self, billing_profile, stripe_card_response):
+        if str(stripe_card_response.object) == 'card':
+            new_card = self.model(billing_profile=billing_profile,
+                                  stripe_id=stripe_card_response.id,
+                                  brand=stripe_card_response.brand,
+                                  country=stripe_card_response.country,
+                                  expiration_month=stripe_card_response.expiration_month,
+                                  expiration_year=stripe_card_response.expiration_year,
+                                  last_four_digits=stripe_card_response.last_four_digits)
+
+            new_card.save()
+            return new_card
+
+        return None
+
+
+class Card(models.Model):
+    billing_profile = models.ForeignKey(BillingProfile)
+    stripe_id = models.CharField(max_length=120, null=True, blank=True)
+    brand = models.CharField(max_length=120, null=True, blank=True)
+    country = models.CharField(max_length=20, null=True, blank=True)
+    expiration_month = models.IntegerField()
+    expiration_year = models.IntegerField()
+    last_four_digits = models.CharField(max_length=4, null=True, blank=True)
+
+    objects = CardManager()
