@@ -47,8 +47,9 @@ def create_payment(request):
             return HttpResponse({'message': 'Could Not Find This User'})
 
         token = request.POST.get('token')
-        customer = stripe.Customer.retrieve(billing_profile.customer_id)
-        customer.sources.create(source=token)
-        print(request.POST)
+        if token is not None:
+            customer = stripe.Customer.retrieve(billing_profile.customer_id)
+            card_response = customer.sources.create(source=token)
+            print(card_response)
         return JsonResponse({'message': 'Success, Card Added Successfully'})
     return HttpResponse('Error', status=401)
