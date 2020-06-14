@@ -5,7 +5,7 @@ import stripe
 # Create your views here.
 from django.utils.http import is_safe_url
 
-from billing.models import BillingProfile
+from billing.models import BillingProfile, Card
 
 STRIPE_PUBLIC_KEY = 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU'
 
@@ -50,6 +50,7 @@ def create_payment(request):
         if token is not None:
             customer = stripe.Customer.retrieve(billing_profile.customer_id)
             card_response = customer.sources.create(source=token)
-            print(card_response)
+            new_card_object = Card.objects.add_new_card(billing_profile, card_response)
+            print(new_card_object)
         return JsonResponse({'message': 'Success, Card Added Successfully'})
     return HttpResponse('Error', status=401)

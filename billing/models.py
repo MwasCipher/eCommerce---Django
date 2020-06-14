@@ -88,5 +88,6 @@ class Card(models.Model):
     expiration_month = models.IntegerField()
     expiration_year = models.IntegerField()
     last_four_digits = models.CharField(max_length=4, null=True, blank=True)
+    default = models.BooleanField(default=True)
 
     objects = CardManager()
