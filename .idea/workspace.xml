@@ -5,8 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billing/templates/stripe_payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/billing/templates/stripe_payment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_my_project/js/v3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/js.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,26 +18,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing/templates/stripe_payment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="35">
+              <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html">
+        <entry file="file://$PROJECT_DIR$/billing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="8" selection-start-column="8" selection-end-column="8" />
+            <state relative-caret-position="320">
+              <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base/css.html">
+        <entry file="file://$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="62" />
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -46,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static_my_project/js/stripe.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1769">
-              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+            <state relative-caret-position="164">
+              <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -55,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
+            <state relative-caret-position="495">
               <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
@@ -125,7 +127,6 @@
         <option value="$PROJECT_DIR$/static_my_project/js/jsrender.min.js" />
         <option value="$PROJECT_DIR$/static_my_project/js/jsrender.js" />
         <option value="$PROJECT_DIR$/billing/urls.py" />
-        <option value="$PROJECT_DIR$/billing/views.py" />
         <option value="$PROJECT_DIR$/static_my_project/js/v3.js" />
         <option value="$PROJECT_DIR$/templates/partials/nav_bar.html" />
         <option value="$PROJECT_DIR$/search/templates/snippets/search_form.html" />
@@ -135,6 +136,7 @@
         <option value="$PROJECT_DIR$/templates/base/js.html" />
         <option value="$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html" />
         <option value="$PROJECT_DIR$/billing/templates/stripe_payment.html" />
+        <option value="$PROJECT_DIR$/billing/views.py" />
       </list>
     </option>
   </component>
@@ -168,6 +170,11 @@
               <item name="ecom" type="462c0819:PsiDirectoryNode" />
               <item name="billing" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecom" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecom" type="462c0819:PsiDirectoryNode" />
+              <item name="carts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecom" type="b2602c69:ProjectViewProjectNode" />
@@ -258,6 +265,9 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/accounts/templates/snippets/login_form.html">
@@ -470,16 +480,6 @@
     <entry file="file://$PROJECT_DIR$/static_my_project/js/jquery-confirm.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/carts/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/carts/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="569">
@@ -515,20 +515,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static_my_project/js/v3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2535">
-          <caret column="169245" selection-start-column="169245" selection-end-column="169245" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="36" column="37" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static_my_project/js/v3.js" />
     <entry file="file://$PROJECT_DIR$/static_my_project/css/stripe.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -563,13 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static_my_project/js/stripe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1769">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base/css.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -579,7 +559,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
+        <state relative-caret-position="495">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
@@ -591,17 +571,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing/templates/stripe_payment.html">
+    <entry file="file://$PROJECT_DIR$/static_my_project/js/stripe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="164">
+          <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing/templates/stripe_jsrender_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/templates/stripe_payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/carts/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="86" column="4" lean-forward="true" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

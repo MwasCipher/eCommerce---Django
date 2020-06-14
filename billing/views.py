@@ -5,13 +5,22 @@ import stripe
 # Create your views here.
 from django.utils.http import is_safe_url
 
+from billing.models import BillingProfile
+
 STRIPE_PUBLIC_KEY = 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU'
 
 stripe.api_key = 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ'
 
 
 def stripe_payment_view(request):
+    billing_profile, billing_profile_created = BillingProfile.objects.get_or_create_billing_profile(request)
 
+    if not billing_profile:
+        return redirect('cart')
+
+    # if request.user.is_authenticated():
+    #     billing_profile = request.user.billing_profile
+    #     my_customer_id = billing_profile.cutomer_id
     next_url = None
     next_ = request.GET.get('next')
     if next_url:
@@ -33,6 +42,13 @@ def create_payment(request):
 
     }
     if request.method == 'POST' and request.is_ajax():
+        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create_billing_profile(request)
+        if not billing_profile:
+            return HttpResponse({'message': 'Could Not Find This User'})
+
+        token = request.POST.get('token')
+        customer = stripe.Customer.retrieve(billing_profile.customer_id)
+        customer.sources.create(source=token)
         print(request.POST)
         return JsonResponse({'message': 'Success, Card Added Successfully'})
     return HttpResponse('Error', status=401)
