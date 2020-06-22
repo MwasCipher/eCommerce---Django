@@ -42,6 +42,9 @@ class BillingProfile(models.Model):
     def __str__(self):
         return self.email
 
+    def charge(self, order_object, card=None):
+        return Charge.objects.charge_customer(self, order_object, card)
+
 
 def billing_profile_created_receiver(instance, sender, *args, **kwargs):
     if not instance.customer_id and instance.email:
