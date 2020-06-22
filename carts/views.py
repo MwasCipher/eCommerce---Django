@@ -114,6 +114,8 @@ def checkout(request):
             if did_charge:
                 order_object.mark_paid()
                 del request.session['cart_id']
+                if not billing_profile.user:
+                    billing_profile.set_cards_inactive()
                 request.session['cart_items'] = 0
                 return redirect('success')
             else:
