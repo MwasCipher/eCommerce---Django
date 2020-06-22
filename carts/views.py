@@ -102,10 +102,15 @@ def checkout(request):
     if request.method == 'POST':
         order_completed = order_object.order_complete()
         if order_completed:
-            order_object.mark_paid()
-            del request.session['cart_id']
-            request.session['cart_items'] = 0
-        return redirect('success')
+            did_charge, charge_message = billing_profile.charge(order_object)
+            if did_charge:
+                order_object.mark_paid()
+                del request.session['cart_id']
+                request.session['cart_items'] = 0
+                return redirect('success')
+            else:
+                print(charge_message)
+                redirect('checkout')
 
     context = {
         'order': order_object,
