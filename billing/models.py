@@ -94,3 +94,44 @@ class Card(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.brand, self.last_four_digits)
+
+
+class ChargeManager(models.Manager):
+    def charge_customer(self, billing_profile, order_object, card=None):
+        card_object = card
+        if card_object is None:
+            cards = billing_profile.card_set.filter(default=True)
+            if cards.exists():
+                card_object = cards.first()
+
+        if card is None:
+            return False, 'No Cards Available'
+        charge = stripe.Charge.create(amount=int(order_object.total*100),
+                                      currency='usd',
+                                      customer=billing_profile.stripe_id,
+                                      source=card_object.stripe_id,
+                                      description='Charge For Cheech')
+
+        new_charge_object = self.model(
+            billing_profile=billing_profile,
+            stripe_id=charge.id,
+            paid=charge.paid,
+            refund=charge.refund,
+            outcome=charge.outcome,
+            outcome_type=charge.outcome['type'],
+            seller_message=charge.outcome.get('seller_message'),
+            risk_level=charge.outcome.get('risk_level'),
+
+        )
+        return
+
+
+class Charge(models.Model):
+    billing_profile = models.ForeignKey(BillingProfile)
+    stripe_id = models.CharField(max_length=120, null=True, blank=True)
+    paid = models.BooleanField(default=False)
+    refund = models.BooleanField(default=False)
+    outcome = models.TextField(blank=True, null=True)
+    outcome_type = models.CharField(max_length=120, null=True, blank=True)
+    seller_message = models.CharField(max_length=120, null=True, blank=True)
+    risk_level = models.CharField(max_length=120, null=True, blank=True)
