@@ -110,7 +110,9 @@ class ChargeManager(models.Manager):
                                       currency='usd',
                                       customer=billing_profile.stripe_id,
                                       source=card_object.stripe_id,
-                                      description='Charge For Cheech')
+                                      description='Charge For Cheech',
+                                      metadata={'order_id': order_object.id}
+                                      )
 
         new_charge_object = self.model(
             billing_profile=billing_profile,
@@ -123,7 +125,8 @@ class ChargeManager(models.Manager):
             risk_level=charge.outcome.get('risk_level'),
 
         )
-        return
+        new_charge_object.save()
+        return new_charge_object.paid, new_charge_object.seller_message
 
 
 class Charge(models.Model):
@@ -135,3 +138,5 @@ class Charge(models.Model):
     outcome_type = models.CharField(max_length=120, null=True, blank=True)
     seller_message = models.CharField(max_length=120, null=True, blank=True)
     risk_level = models.CharField(max_length=120, null=True, blank=True)
+
+    objects = ChargeManager()
