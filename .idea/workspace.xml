@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f35b5f-d5e3-4b25-808f-6159d4c902ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/carts/templates/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/carts/templates/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/carts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/stripe.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/stripe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static_my_project/js/stripe.js" beforeDir="false" afterPath="$PROJECT_DIR$/static_my_project/js/stripe.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static_my_project/js/stripe.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
+            <state relative-caret-position="285">
+              <caret line="183" column="12" selection-start-line="183" selection-start-column="12" selection-end-line="183" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -238,6 +235,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24944155" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -603,8 +601,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static_my_project/js/stripe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
+        <state relative-caret-position="285">
+          <caret line="183" column="12" selection-start-line="183" selection-start-column="12" selection-end-line="183" selection-end-column="12" />
         </state>
       </provider>
     </entry>

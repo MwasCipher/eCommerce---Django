@@ -129,16 +129,16 @@ function displayButtonStatus(element, newHtml, newClasses, loadTime, timeout){
     if(!loadTime){
         loadTime = 1500
     }
-    var defaultHtml = element.html()
-    var defaultClasses = element.attr('class')
+//    var defaultHtml = element.html()
+//    var defaultClasses = element.attr('class')
     element.html(newHtml)
-    element.removeClass(defaultClasses)
+    element.removeClass(loadingButtonDefaultClasses)
     element.addClass(newClasses)
 
     setTimeout(function(){
 
-        element.html(defaultClasses)
-        element.addClass(defaultClasses)
+        element.html(loadingButtonDefaultHtml)
+        element.addClass(loadingButtonDefaultClasses)
         element.removeClass(newClasses)
 
 
@@ -180,6 +180,9 @@ function stripeTokenHandler(nextUrl, token) {
             }else{
                 alert(successMessage)
             }
+
+            loadingButton.html(loadingButtonDefaultHtml)
+            loadingButton.attr('class', loadingButtonDefaultClasses)
             redirectToNext(nextUrl, 1500)
         },
         error: function(error){
