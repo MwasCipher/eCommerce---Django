@@ -44,14 +44,14 @@ class BillingProfile(models.Model):
     def __str__(self):
         return self.email
 
-    def get_payment_method_url(self):
-        return reverse('stripe_payment/')
-
     def charge(self, order_object, card=None):
         return Charge.objects.charge_customer(self, order_object, card)
 
     def get_cards(self):
         return self.card_set.all()
+
+    def get_payment_method_url(self):
+        return reverse('stripe_payment/')
 
     @property
     def has_card(self):
@@ -130,6 +130,14 @@ class Card(models.Model):
     def __str__(self):
         return "{} {}".format(self.brand, self.last_four_digits)
 
+
+def new_card_post_save_receiver(sender, instance, created, *args, **kwargs):
+    if instance.default:
+        billing_profile = instance.billing_profile
+        qs = Card.objects.filter(billing_profile=billing_profile).exclude(pk=instance.pk)
+        qs.update(default=False)
+
+post_save.connect(new_card_post_save_receiver, sender=Card)
 
 class ChargeManager(models.Manager):
     def charge_customer(self, billing_profile, order_object, card=None):

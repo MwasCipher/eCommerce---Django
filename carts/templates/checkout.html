@@ -103,7 +103,8 @@
             <p>Shipping Address: {{ order.shipping_address.get_address }}</p><br>
             <p>Billing Address Total: {{ order.billing_address.get_address }}</p><br>
             <p>Cart Total: {{ order.cart.total }}</p><br>
-            <p>Payment Mathod: {{ billing_profile.default_card (<a href="{{ billing_profile.get_payment_method_url }}">
+            <p>Payment Mathod: {{ billing_profile.default_card (<a href="{{ billing_profile.get_payment_method_url }}
+            ?next={{ request.build_absolute_uri }}">
                 Change? </a>) }}</p><br>
             <p>Shipping Total: {{ order.shipping_total }}</p><br>
             <p>Order Total: {{ order.total }}</p><br><br>
