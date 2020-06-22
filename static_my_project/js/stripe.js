@@ -186,6 +186,9 @@ function stripeTokenHandler(nextUrl, token) {
             redirectToNext(nextUrl, 1500)
         },
         error: function(error){
+            $alert({'title': An Error Occurred, 'content': Please ReEnter Card Details Again...})
+            loadingButton.html(loadingButtonDefaultHtml)
+            loadingButton.attr('class', loadingButtonDefaultClasses)
             console.log(error)
         }
 
