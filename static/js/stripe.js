@@ -65,21 +65,80 @@ card.on('change', function(event) {
 });
 
 // Handle form submission.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
+//var form = document.getElementById('payment-form');
+//form.addEventListener('submit', function(event) {
+//  event.preventDefault();
+//
+//  var loadingButton = $('.btn-load')
+//
+//  var loadTime = 1500
+//  var errorHtml = '<i class="fa fa-warning"></i>An Error Occurred'
+//  var LoadingHtml = '<i class="fa fa-spin fa-spinner">Loading...</i>'
+//  var errorClass = 'class="btn btn-danger disabled my-3" '
+//  var loadingClass = 'class="btn btn-success disabled my-3" '
+//
+//  stripe.createToken(card).then(function(result) {
+//    if (result.error) {
+//      // Inform the user if there was an error.
+//      var errorElement = document.getElementById('card-errors');
+//      errorElement.textContent = result.error.message;
+//    } else {
+//      // Send the token to your server.
+//      stripeTokenHandler(nextUrl, result.token);
+//    }
+//  });
+//});
+
+var form = $('#payment-form');
+form.on('submit', function(event) {
   event.preventDefault();
+  var $this = $(this)
+  var loadingButton = $this.find('.btn-load')
+
+  var loadTime = 1500
+  var currentTimeout
+  var errorHtml = '<i class="fa fa-warning"></i>An Error Occurred'
+  var LoadingHtml = '<i class="fa fa-spin fa-spinner">Loading...</i>'
+  var errorClass = 'class="btn btn-danger disabled my-3" '
+  var loadingClass = 'class="btn btn-success disabled my-3" '
 
   stripe.createToken(card).then(function(result) {
     if (result.error) {
       // Inform the user if there was an error.
-      var errorElement = document.getElementById('card-errors');
+      var errorElement = $('#card-errors');
       errorElement.textContent = result.error.message;
+      currentTimeout = displayButtonStatus(loadingButton, errorHtml, errorClass, 1000, currentTimeout)
     } else {
+        currentTimeout = displayButtonStatus(loadingButton, loadingHtml, loadingClass, 2000, currentTimeout)
       // Send the token to your server.
       stripeTokenHandler(nextUrl, result.token);
     }
   });
 });
+
+function displayButtonStatus(element, newHtml, newClasses, loadTime, timeout){
+    if(timeout){
+    clearTimeout(timeout)
+
+    }
+    if(!loadTime){
+        loadTime = 1500
+    }
+    var defaultHtml = element.html()
+    var defaultClasses = element.attr('class')
+    element.html(newHtml)
+    element.removeClass(defaultClasses)
+    element.addClass(newClasses)
+
+    setTimeout(function(){
+
+        element.html(defaultClasses)
+        element.addClass(defaultClasses)
+        element.removeClass(newClasses)
+
+    }, loadTime)
+
+}
 
 function redirectToNext(nextpath, timeOffSet){
     if(nextpath){
