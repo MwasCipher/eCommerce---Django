@@ -107,11 +107,11 @@ class ChargeManager(models.Manager):
             if cards.exists():
                 card_object = cards.first()
 
-        if card is None:
+        if card_object is None:
             return False, 'No Cards Available'
         charge = stripe.Charge.create(amount=int(order_object.total*100),
                                       currency='usd',
-                                      customer=billing_profile.stripe_id,
+                                      customer=billing_profile.customer_id,
                                       source=card_object.stripe_id,
                                       description='Charge For Cheech',
                                       metadata={'order_id': order_object.id}
