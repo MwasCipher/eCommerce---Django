@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.http import JsonResponse
 
 from orders.models import Order
@@ -10,9 +11,14 @@ from .models import Cart
 
 from products.models import Product
 from billing.models import BillingProfile
+import stripe
 
 
 # Create your views here.
+STRIPE_PUBLIC_KEY = getattr(settings, 'STRIPE_PUBLIC_KEY', 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU')
+
+STRIPE_SECRET_KEY = getattr(settings, 'STRIPE_SECRET_KEY', 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ')
+stripe.api_key = STRIPE_SECRET_KEY
 
 
 def cart_detail_api_view(request):
