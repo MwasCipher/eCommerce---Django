@@ -91,3 +91,6 @@ class Card(models.Model):
     default = models.BooleanField(default=True)
 
     objects = CardManager()
+
+    def __str__(self):
+        return "{} {}".format(self.brand, self.last_four_digits)
