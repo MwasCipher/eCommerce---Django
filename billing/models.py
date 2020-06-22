@@ -67,8 +67,10 @@ post_save.connect(user_created_receiver, sender=User)
 
 
 class CardManager(models.Manager):
-    def add_new_card(self, billing_profile, stripe_card_response):
-        if str(stripe_card_response.object) == 'card':
+    def add_new_card(self, billing_profile, token):
+        if token:
+            customer = stripe.Customer.retrieve(billing_profile.customer_id)
+            stripe_card_response = customer.sources.create(source=token)
             new_card = self.model(billing_profile=billing_profile,
                                   stripe_id=stripe_card_response.id,
                                   brand=stripe_card_response.brand,
@@ -111,7 +113,7 @@ class ChargeManager(models.Manager):
             return False, 'No Cards Available'
         charge = stripe.Charge.create(amount=int(order_object.total*100),
                                       currency='usd',
-                                      customer=billing_profile.customer_id,
+                                      customer=billing_profile.stripe_id,
                                       source=card_object.stripe_id,
                                       description='Charge For Cheech',
                                       metadata={'order_id': order_object.id}

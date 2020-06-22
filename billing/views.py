@@ -50,7 +50,8 @@ def create_payment(request):
         if token is not None:
             customer = stripe.Customer.retrieve(billing_profile.customer_id)
             card_response = customer.sources.create(source=token)
-            new_card_object = Card.objects.add_new_card(billing_profile, card_response)
+            # new_card_object = Card.objects.add_new_card(billing_profile, card_response)
+            new_card_object = Card.objects.add_new_card(billing_profile, token)
             print(new_card_object)
         return JsonResponse({'message': 'Success, Card Added Successfully'})
     return HttpResponse('Error', status=401)
