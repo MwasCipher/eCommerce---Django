@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="96f35b5f-d5e3-4b25-808f-6159d4c902ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carts/templates/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/carts/templates/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecom/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketing/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketing/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +13,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ecom/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+            <state relative-caret-position="299">
+              <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/marketing/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,6 +101,7 @@
         <option value="$PROJECT_DIR$/static_my_project/js/stripe.js" />
         <option value="$PROJECT_DIR$/carts/templates/checkout.html" />
         <option value="$PROJECT_DIR$/ecom/settings.py" />
+        <option value="$PROJECT_DIR$/marketing/models.py" />
       </list>
     </option>
   </component>
@@ -118,6 +130,11 @@
               <item name="ecom" type="b2602c69:ProjectViewProjectNode" />
               <item name="ecom" type="462c0819:PsiDirectoryNode" />
               <item name="ecom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ecom" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ecom" type="462c0819:PsiDirectoryNode" />
+              <item name="marketing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ecom" type="b2602c69:ProjectViewProjectNode" />
@@ -212,9 +229,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/carts/templates/snippets/remove_products_form.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/products/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -553,8 +567,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ecom/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+        <state relative-caret-position="299">
+          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketing/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
