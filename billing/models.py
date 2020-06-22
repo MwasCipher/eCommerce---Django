@@ -3,6 +3,8 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 
 # Create your models here.
+from django.core.urlresolvers import reverse
+
 from accounts.models import GuestEmail
 import stripe
 
@@ -42,6 +44,9 @@ class BillingProfile(models.Model):
     def __str__(self):
         return self.email
 
+    def get_payment_method_url(self):
+        return reverse('stripe_payment/')
+
     def charge(self, order_object, card=None):
         return Charge.objects.charge_customer(self, order_object, card)
 
@@ -55,7 +60,7 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        default_cards = self.get_cards().filter(default=True)
+        default_cards = self.get_cards().filter(default=True, active=True)
         if default_cards.exists():
             return default_cards.first()
         return None
