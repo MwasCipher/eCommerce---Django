@@ -96,6 +96,7 @@ form.on('submit', function(event) {
   var loadingButton = $this.find('.btn-load')
 
   var loadTime = 1500
+  var currentTimeout
   var errorHtml = '<i class="fa fa-warning"></i>An Error Occurred'
   var LoadingHtml = '<i class="fa fa-spin fa-spinner">Loading...</i>'
   var errorClass = 'class="btn btn-danger disabled my-3" '
@@ -106,14 +107,23 @@ form.on('submit', function(event) {
       // Inform the user if there was an error.
       var errorElement = $('#card-errors');
       errorElement.textContent = result.error.message;
+      currentTimeout = displayButtonStatus(loadingButton, errorHtml, errorClass, 1000, currentTimeout)
     } else {
+        currentTimeout = displayButtonStatus(loadingButton, loadingHtml, loadingClass, 2000, currentTimeout)
       // Send the token to your server.
       stripeTokenHandler(nextUrl, result.token);
     }
   });
 });
 
-function displayButtonStaus(element, newHtml, newClasses, loadTime){
+function displayButtonStatus(element, newHtml, newClasses, loadTime, timeout){
+    if(timeout){
+    clearTimeout(timeout)
+
+    }
+    if(!loadTime){
+        loadTime = 1500
+    }
     var defaultHtml = element.html()
     var defaultClasses = element.attr('class')
     element.html(newHtml)
