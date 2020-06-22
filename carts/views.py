@@ -83,6 +83,7 @@ def checkout(request):
     shipping_address_id = request.session.get('shipping_address_id', None)
 
     address_qs = None
+    has_card = False
 
     billing_profile, billing_profile_created = BillingProfile.objects.get_or_create_billing_profile(request)
     if billing_profile is not None:
@@ -98,6 +99,8 @@ def checkout(request):
             del request.session['billing_address_id']
         if shipping_address_id or billing_address_id:
             order_object.save()
+
+        has_card = billing_profile.has_card()
 
     if request.method == 'POST':
         order_completed = order_object.order_complete()
@@ -120,6 +123,8 @@ def checkout(request):
         'address_form': address_form,
         'billing_address_form': billing_address_form,
         'address_qs': address_qs,
+        'has_card': has_card,
+        'public_key': public_key,
     }
     return render(request, 'checkout.html', context)
 

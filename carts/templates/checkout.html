@@ -81,17 +81,34 @@
 
 
     {% else %}
+        {% if not has_card %}
 
-        <h2>Finalize Checkout</h2>
-        <p>Cart Items: {% for product in order.cart.products.all %} {{ product }}{% if not forloop.last %},{% endif %} {%endfor  %}</p><br>
-        <p>Shipping Address: {{ order.shipping_address.get_address }}</p><br>
-        <p>Billing Address Total: {{ order.billing_address.get_address }}</p><br>
-        <p>Cart Total: {{ order.cart.total }}</p><br>
-        <p>Shipping Total: {{ order.shipping_total }}</p><br>
-        <p>Order Total: {{ order.total }}</p><br><br>
-        <form action="" class="form" method="post"> {% csrf_token %}
-            <button class="btn btn-success" type="submit">Checkout</button>
-        </form>
+            <div class="col-10 col-md-6 mx-auto">
+
+                <h2>Debit/Credit Card Details</h2>
+
+
+                <div class="stripe-payment-form" data-token="{{ public_key }}" data-next-url="{{ request.build_absolute_uri }}"
+                     btn-title="Add Payment Method">
+
+
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <h2>Finalize Checkout</h2>
+            <p>Cart Items: {% for product in order.cart.products.all %} {{ product }}{% if not forloop.last %},{% endif %} {%endfor  %}</p><br>
+            <p>Shipping Address: {{ order.shipping_address.get_address }}</p><br>
+            <p>Billing Address Total: {{ order.billing_address.get_address }}</p><br>
+            <p>Cart Total: {{ order.cart.total }}</p><br>
+            <p>Shipping Total: {{ order.shipping_total }}</p><br>
+            <p>Order Total: {{ order.total }}</p><br><br>
+            <form action="" class="form" method="post"> {% csrf_token %}
+                <button class="btn btn-success" type="submit">Checkout</button>
+            </form>
+        {% endif %}
     {% endif %}
 {% endif %}
 
