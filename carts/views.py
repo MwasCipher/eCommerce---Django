@@ -13,7 +13,6 @@ from products.models import Product
 from billing.models import BillingProfile
 import stripe
 
-
 # Create your views here.
 STRIPE_PUBLIC_KEY = getattr(settings, 'STRIPE_PUBLIC_KEY', 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU')
 
@@ -25,11 +24,11 @@ def cart_detail_api_view(request):
     cart_object, new_object = Cart.objects.new_or_getcurrent(request)
     products = [
         {
-         'object_title': obj.title,
-         'object_price': obj.price,
-         'url': obj.get_absolute_url(),
-         'id': obj.id
-         }
+            'object_title': obj.title,
+            'object_price': obj.price,
+            'url': obj.get_absolute_url(),
+            'id': obj.id
+        }
         for obj in cart_object.products.all()]
     cart_data = {'products': products, 'subtotal': cart_object.subtotal, 'total': cart_object.total}
 
@@ -120,7 +119,7 @@ def checkout(request):
             else:
                 print(charge_message)
                 redirect('checkout')
-
+    public_key = STRIPE_PUBLIC_KEY
     context = {
         'order': order_object,
         'billing_profile': billing_profile,
