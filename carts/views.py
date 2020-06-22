@@ -105,7 +105,7 @@ def checkout(request):
         if shipping_address_id or billing_address_id:
             order_object.save()
 
-        has_card = billing_profile.has_card()
+        has_card = billing_profile.has_card
 
     if request.method == 'POST':
         order_completed = order_object.order_complete()

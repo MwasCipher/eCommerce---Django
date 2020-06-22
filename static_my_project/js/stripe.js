@@ -88,12 +88,17 @@ card.on('change', function(event) {
 //    }
 //  });
 //});
-
 var form = $('#payment-form');
+var loadingButton = form.find('.btn-load')
+var loadingButtonDefaultHtml = loadingButton.html()
+var loadingButtonDefaultClasses = loadingButton.attr('class')
+
+
 form.on('submit', function(event) {
   event.preventDefault();
   var $this = $(this)
   var loadingButton = $this.find('.btn-load')
+  loadingButton.blur()
 
   var loadTime = 1500
   var currentTimeout
@@ -117,10 +122,10 @@ form.on('submit', function(event) {
 });
 
 function displayButtonStatus(element, newHtml, newClasses, loadTime, timeout){
-    if(timeout){
-    clearTimeout(timeout)
-
-    }
+//    if(timeout){
+//    clearTimeout(timeout)
+//
+//    }
     if(!loadTime){
         loadTime = 1500
     }
@@ -135,6 +140,7 @@ function displayButtonStatus(element, newHtml, newClasses, loadTime, timeout){
         element.html(defaultClasses)
         element.addClass(defaultClasses)
         element.removeClass(newClasses)
+
 
     }, loadTime)
 
