@@ -41,13 +41,13 @@ class MailChimp(object):
         }
         endpoint = self.get_members_endpoint() + hashed_email
         request_object = requests.put(endpoint, data=json.dumps(data), auth=('', self.key))
-        return request_object.json()
+        return request_object.status_code, request_object.json()
 
     def check_subscription_status(self, email):
         hashed_email = get_subscriber_hash(email)
         endpoint = self.get_members_endpoint() + hashed_email
         request_object = requests.get(endpoint, auth=('', self.key))
-        return request_object.json()
+        return request_object.status_code, request_object.json()
 
     def check_valid_status(self, status):
         choices = ['subscribed', 'unsubscribed', 'pending', 'cleaned']
@@ -64,7 +64,7 @@ class MailChimp(object):
         }
         endpoint = self.get_members_endpoint()
         request_object = requests.post(endpoint, auth=('', self.key), data=json.dumps(data))
-        return request_object.json()
+        return request_object.status_code, request_object.json()
 
     def unsubscribe(self, email):
         return self.change_subscription_status(email, status='unsubscribe')
