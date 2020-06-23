@@ -1,10 +1,29 @@
 from django.conf import settings
 import requests
 import json
+import hashlib
+import re
 
 MAILCHIMP_API_KEY = getattr(settings, 'MAILCHIMP_API_KEY', None)
 MAILCHIMP_DATA_CENTER = getattr(settings, 'MAILCHIMP_DATA_CENTER', None)
 MAILCHIMP_EMAIL_LIST_ID = getattr(settings, 'MAILCHIMP_EMAIL_LIST_ID', None)
+
+
+def check_email(email):
+    if not re.match(r'.+@.+\..+', email):
+        raise ValueError('String Passed is Not A Valid Email Address')
+    return email
+
+
+def get_subscriber_hash(member_email):
+    check_email(member_email)
+    member_email = member_email.lower().encode()
+    m = hashlib.md5(member_email)
+    return m.hexdigest()
+
+
+def get_members_endpoint(self):
+    return self.list_endpoint + '/members/'
 
 
 class MailChimp(object):
@@ -16,7 +35,8 @@ class MailChimp(object):
         self.list_endpoint = '{api_url}/lists/{list_id}'.format(api_url=self.api_url, list_id=self.list_id)
 
     def check_subscription_status(self, email):
-        endpoint = self.api_url
+        hashed_email = get_subscriber_hash(email)
+        endpoint = self.get_members_endpoint() + hashed_email
         request_object = requests.get(endpoint, auth=('', self.key))
         return request_object.json()
 
@@ -33,6 +53,6 @@ class MailChimp(object):
             'email_address': email,
             'status': status
         }
-        endpoint = self.list_endpoint + '/members'
+        endpoint = self.get_members_endpoint()
         request_object = requests.post(endpoint, auth=('', self.key), data=json.dumps(data))
         return request_object.json()
