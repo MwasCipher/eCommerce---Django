@@ -34,6 +34,15 @@ class MailChimp(object):
         self.list_id = MAILCHIMP_EMAIL_LIST_ID
         self.list_endpoint = '{api_url}/lists/{list_id}'.format(api_url=self.api_url, list_id=self.list_id)
 
+    def change_subscription_status(self, email, status='unsubscribed'):
+        hashed_email = get_subscriber_hash(email)
+        data = {
+            'status': self.check_valid_status(status)
+        }
+        endpoint = self.get_members_endpoint() + hashed_email
+        request_object = requests.put(endpoint, data=json.dumps(data), auth=('', self.key))
+        return request_object.json()
+
     def check_subscription_status(self, email):
         hashed_email = get_subscriber_hash(email)
         endpoint = self.get_members_endpoint() + hashed_email
