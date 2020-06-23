@@ -22,10 +22,6 @@ def get_subscriber_hash(member_email):
     return m.hexdigest()
 
 
-def get_members_endpoint(self):
-    return self.list_endpoint + '/members/'
-
-
 class MailChimp(object):
     def __init__(self):
         super(MailChimp, self).__init__()
@@ -33,6 +29,9 @@ class MailChimp(object):
         self.api_url = "https://{dc}.api.mailchimp.com/3.0".format(dc=MAILCHIMP_DATA_CENTER)
         self.list_id = MAILCHIMP_EMAIL_LIST_ID
         self.list_endpoint = '{api_url}/lists/{list_id}'.format(api_url=self.api_url, list_id=self.list_id)
+
+    def get_members_endpoint(self):
+        return self.list_endpoint + '/members/'
 
     def change_subscription_status(self, email, status='unsubscribed'):
         hashed_email = get_subscriber_hash(email)
