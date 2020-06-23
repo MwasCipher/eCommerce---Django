@@ -29,16 +29,21 @@ post_save.connect(marketing_pref_create_receiver, sender=MarketingPreference)
 
 
 def marketing_pref_update_receiver(sender, instance, *args, **kwargs):
-    if instance.subscribed:
-        status_code, response_data = MailChimp().subscribe(instance.user.email)
+    if instance.subscribed != instance.mail_chimp_subscribed:
+        if instance.subscribed:
+            status_code, response_data = MailChimp().subscribe(instance.user.email)
 
-    else:
-        status_code, response_data = MailChimp().unsubscribe(instance.user.email)
+        else:
+            status_code, response_data = MailChimp().unsubscribe(instance.user.email)
 
-    if response_data['status'] == 'subscribed':
-        instance.subscribed = True
-    else:
-        instance.subscribed = False
+        if response_data['status'] == 'subscribed':
+            instance.subscribed = True
+            instance.mail_chimp_subscribed = True
+            instance.mail_chimp_message = response_data
+        else:
+            instance.subscribed = False
+            instance.mail_chimp_subscribed = False
+            instance.mail_chimp_message = response_data
 
 
 pre_save.connect(marketing_pref_update_receiver, sender=MarketingPreference)
