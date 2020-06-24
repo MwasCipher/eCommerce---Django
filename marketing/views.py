@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import MarketingPrefenceForm
 from .models import MarketingPreference
@@ -8,10 +9,11 @@ from .models import MarketingPreference
 # Create your views here.
 
 
-class MarketingPreferenceUpdateView(UpdateView):
+class MarketingPreferenceUpdateView(UpdateView, SuccessMessageMixin):
     form_class = MarketingPrefenceForm
     template_name = 'marketing_form.html'
     success_url = 'update_pref'
+    success_message = 'Your Email Preferences Updated Successfully'
 
     def dispatch(self, request, *args, **kwargs):
         user = self.request.user
