@@ -41,6 +41,9 @@ class MarketingPreferenceUpdateView(UpdateView, SuccessMessageMixin):
 
 
 class MailChimpWebHookView(CsrfExemptMixin, View):
+    # def get(self, request, *args, **kwargs):
+    #     return HttpResponse('Thank You, Testing GET Method...', status=200)
+
     def post(self, request, *args, **kwargs):
         data = request.POST
         list_id = data.get('data[list_id]')
@@ -69,7 +72,6 @@ class MailChimpWebHookView(CsrfExemptMixin, View):
                               is_mail_chimp_message=str(data))
 
         return HttpResponse('Thank You', status=200)
-
 
 # def mail_chimp_webhook_view(request):
 #     data = request.POST
