@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 
 from .forms import MarketingPrefenceForm
@@ -16,7 +16,7 @@ class MarketingPreferenceUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         user = self.request.user
         if not user.is_authenticated():
-            return HttpResponse('Not Allowed', status=400)
+            return redirect('login?next=update_pref')
 
         return super(MarketingPreferenceUpdateView, self).dispatch(request, *args, **kwargs)
 
