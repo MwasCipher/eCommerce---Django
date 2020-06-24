@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'trta9xu8od)a!*knwld*r%4ylz$30k%odq-#5ot3m3-*_0*v+)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -155,3 +155,14 @@ STATICFILES_DIRS = [
                                                   # Found in My Project's Directory
 ]
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'ecom/media')
+
+
+CORS_REPLACE_HTTPS_REFERER = True
+HOST_SCHEME = 'https://'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 1000000
+SECURE_FRAME_DENY = True
