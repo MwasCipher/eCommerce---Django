@@ -10,7 +10,10 @@ from .models import MarketingPreference
 class MarketingPreferenceUpdateView(UpdateView):
     form_class = MarketingPrefenceForm
     template_name = 'marketing_form.html'
-    success_url = '/'
+    success_url = 'marketing_email'
+
+    def get_context(self, **kwargs):
+        context = super()
 
     def get_object(self):
         user = self.request.user
