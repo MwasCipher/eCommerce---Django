@@ -25,7 +25,7 @@ SECRET_KEY = 'trta9xu8od)a!*knwld*r%4ylz$30k%odq-#5ot3m3-*_0*v+)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '.herokuapp.com']
 
 
 # Application definition
@@ -57,9 +57,9 @@ STRIPE_PUBLIC_KEY = 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU'
 
 STRIPE_SECRET_KEY = 'sk_test_EkmThKAelBXpI5emhMFE2fns00YtrrQBaZ'
 
-MAILCHIMP_API_KEY = ''
-MAILCHIMP_DATA_CENTER = ''
-MAILCHIMP_EMAIL_LIST_ID = ''
+MAILCHIMP_API_KEY = '8c31ff27ffbe58eb7caf1a6e20a94a07-us18'
+MAILCHIMP_DATA_CENTER = 'us18'
+MAILCHIMP_EMAIL_LIST_ID = 'd8deece3ab'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

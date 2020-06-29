@@ -26,7 +26,7 @@ class MailChimp(object):
     def __init__(self):
         super(MailChimp, self).__init__()
         self.key = MAILCHIMP_API_KEY
-        self.api_url = "https://{dc}.api.mailchimp.com/3.0".format(dc=MAILCHIMP_DATA_CENTER)
+        self.api_url = 'https://{dc}.api.mailchimp.com/3.0'.format(dc=MAILCHIMP_DATA_CENTER)
         self.list_id = MAILCHIMP_EMAIL_LIST_ID
         self.list_endpoint = '{api_url}/lists/{list_id}'.format(api_url=self.api_url, list_id=self.list_id)
 
