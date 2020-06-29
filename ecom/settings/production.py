@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'trta9xu8od)a!*knwld*r%4ylz$30k%odq-#5ot3m3-*_0*v+)'
 DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', '.herokuapp.com']
-
 
 # Application definition
 
@@ -91,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -106,10 +103,10 @@ DATABASES = {
 }
 
 import dj_database_url
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -129,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -142,7 +138,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -157,10 +152,9 @@ STATIC_DIRS = [
 ]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_my_project'),  # Where i store My own Custom CSS, JS, Images...
-                                                  # Found in My Project's Directory
+    # Found in My Project's Directory
 ]
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'ecom/media')
-
 
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = 'https://'

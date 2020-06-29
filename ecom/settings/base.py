@@ -61,6 +61,11 @@ MAILCHIMP_API_KEY = '8c31ff27ffbe58eb7caf1a6e20a94a07-us18'
 MAILCHIMP_DATA_CENTER = 'us18'
 MAILCHIMP_EMAIL_LIST_ID = 'd8deece3ab'
 
+AWS_USERNAME = ''
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_KEY = ''
+AWS_GROUP_NAME = ''
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

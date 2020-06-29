@@ -5,6 +5,7 @@ from django.db.models.signals import post_save, pre_save
 from .utils import MailChimp
 
 
+
 # Create your models here.
 
 class MarketingPreference(models.Model):
