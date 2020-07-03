@@ -27,6 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0']
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mwangiwawerucollins@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+Managers = (
+    ('cheech@mail.com', 'Collins Mwangi'),
+)
+ADMINS = Managers
 
 # Application definition
 
