@@ -25,7 +25,7 @@ SECRET_KEY = 'trta9xu8od)a!*knwld*r%4ylz$30k%odq-#5ot3m3-*_0*v+)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'mwangiwawerucollins@gmail.com'
@@ -61,6 +61,9 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_URL_REDIRECT = '/'
 # Stripe Keys
 STRIPE_PUBLIC_KEY = 'pk_test_ixXMDbREcjwgzM5oPghMBn0r00Q1kMltOU'
 
