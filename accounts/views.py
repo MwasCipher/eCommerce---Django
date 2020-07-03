@@ -1,10 +1,28 @@
 from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.utils.http import is_safe_url
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
 from .signals import user_logged_in_signal
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, DetailView
+
+
+@login_required
+def user_profile(request):
+    return render(request, 'profile.html')
+
+
+class UserProfile(DetailView):
+    template_name = 'profile.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserProfile, self).dispatch(request, *args, **kwargs)
 
 
 def register_guest(request):
@@ -56,6 +74,7 @@ class LoginView(FormView):
             else:
                 return redirect('index')
         return super(LoginView, self).form_invalid(form)
+
 
 #
 # def login_page(request):
