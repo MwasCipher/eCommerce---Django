@@ -4,6 +4,10 @@
 {% url 'cart' as cart_url %}
 {% url 'login' as login_url %}
 {% url 'logout' as logout_url %}
+
+{% url 'profile' as profile_url %}
+
+
 {% load static %}
 
 <!-- Navbar -->
@@ -26,6 +30,7 @@
           <li class="nav-item mr-3 {% if request.path == products_url %}active{% endif %}">
             <a class="nav-link" href="{% url 'products' %}">Products</a>
           </li>
+
            <li class="nav-item mr-3 {% if request.path == cart_url %}active{% endif %}">
             <a class="nav-link" href="{% url 'cart' %}"><span class="cart-count"> {{ request.session.cart_items }} </span>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i> </a>
@@ -36,12 +41,21 @@
 
           {% if request.user.is_authenticated %}
 
-            <li class="nav-item mr-3 {% if request.path == logout_url %}active{% endif %}">
-              <a class="nav-link" href="{% url 'logout' %}">
-                <i class="fas fa-sign-in-alt"></i>
+          <li class="nav-item submenu dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Account</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item {% if request.path == profile_url %}active{% endif %} " href="{{ profile_url }}">Profile</a>
+              <a class="dropdown-item {% if request.path == logout_url %}active{% endif %} " href="{{ logout_url }}">Logout</a>
+            </div>
+          </li>
 
-                Logout</a>
-            </li>
+            <!--<li class="nav-item mr-3 {% if request.path == logout_url %}active{% endif %}">-->
+              <!--<a class="nav-link" href="{% url 'logout' %}">-->
+                <!--<i class="fas fa-sign-in-alt"></i>-->
+
+                <!--Logout</a>-->
+            <!--</li>-->
           {% else %}
 
             <li class="nav-item mr-3 {% if request.path == register_url %}active{% endif %}">

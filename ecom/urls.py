@@ -28,7 +28,7 @@ from django.contrib.auth.views import LogoutView
 #                             ProductFeaturedListView,
 #                             ProductFeaturedDetailView
 #                             )
-
+from django.views.generic import RedirectView
 
 from .views import home_page, about_page, contact_page
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
@@ -40,7 +40,9 @@ urlpatterns = [
     url(r'^cart/', include('carts.urls')),
     url(r'^billing/', include('billing.urls')),
     url(r'^marketing/', include('marketing.urls')),
-    url(r'^accounts/', include('accounts.urls')),
+    url(r'^account/', include('accounts.urls')),
+    url(r'^accounts/', RedirectView.as_view(url='/account')),
+    url(r'^settings/', RedirectView.as_view(url='/account')),
     url(r'^$', home_page, name='index'),
     url(r'^about/$', about_page, name='about'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
