@@ -53,6 +53,7 @@ def cart_update(request):
         except Product.DoesNotExist:
             return redirect('cart')
         cart_object, new_object = Cart.objects.new_or_getcurrent(request)
+
         if product in cart_object.products.all():
             cart_object.products.remove(product)
             product_added = False
@@ -66,7 +67,7 @@ def cart_update(request):
             json_data = {
                 'productAdded': product_added,
                 'productRemoved': not product_added,
-                'CartItemCount': cart_object.products.count(),
+                'CartItemCount': cart_object.products.count()
             }
 
             return JsonResponse(json_data)
