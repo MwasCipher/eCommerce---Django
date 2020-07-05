@@ -40,6 +40,7 @@ def cart(request):
     context = {
         'cart': cart_object
     }
+
     return render(request, 'index.html', context)
 
 
@@ -56,10 +57,14 @@ def cart_update(request):
 
         if product in cart_object.products.all():
             cart_object.products.remove(product)
+            request.session['cart_items'] = cart_object.products.count()
+            print(request.session['cart_items'])
             product_added = False
         else:
             cart_object.products.add(product)
             request.session['cart_items'] = cart_object.products.count()
+
+            print(request.session['cart_items'])
             product_added = True
 
         if request.is_ajax():
