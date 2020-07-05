@@ -45,8 +45,14 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">Account</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item {% if request.path == profile_url %}active{% endif %} " href="{{ profile_url }}">Profile</a>
-              <a class="dropdown-item {% if request.path == logout_url %}active{% endif %} " href="{{ logout_url }}">Logout</a>
+              <a class="dropdown-item {% if request.path == profile_url %}active{% endif %} "
+                 href="{{ profile_url }}">Profile</a>
+              <a class="dropdown-item {% if request.path == logout_url  %}active{% endif %} "
+                 href="{{ profile_url }}">Billing</a>
+              <a class="dropdown-item {% if request.path == cart_url %}active{% endif %} "
+                 href="{{ profile_url }}">Shopping History</a>
+              <a class="dropdown-item {% if request.path == logout_url %}active{% endif %} "
+                 href="{{ logout_url }}">Logout</a>
             </div>
           </li>
 
