@@ -1,0 +1,6 @@
+Please Verify Your Account For  {{ email }} By Clicking The Link Below:
+{{ path }}
+ To Continue Shopping... Proceed To Login.
+
+ Thank You,
+ eCommerce

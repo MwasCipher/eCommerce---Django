@@ -4,10 +4,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.utils.http import is_safe_url
+from django.contrib import messages
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
 from .signals import user_logged_in_signal
 from django.views.generic import CreateView, FormView, DetailView
+from django.core.mail import send_mail
+from django.template.loader import get_template
 
 
 # class LoginRequiredMixin(object):
@@ -62,6 +65,9 @@ class LoginView(FormView):
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
+            if user.is_active:
+                messages.error(request, 'This Message is INACTIVE, Contact Admin To Be Activated')
+                return super(LoginView, self).form_invalid(form)
             login(request, user)
             user_logged_in_signal.send(user.__class__, instance=user, request=request)
 
