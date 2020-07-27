@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 from django.conf import settings
+from django.db.models.signals import pre_save, post_save
 from ecom.utils import random_string_generator, unique_verification_key_generator
 
 # Create your models here.
@@ -150,3 +151,15 @@ def pre_save_email_activation(sender, instance, *args, **kwargs):
             # if qs.exists():
             #     key = random_string_generator(size=key_length)
             instance.key = unique_verification_key_generator(instance)
+
+
+pre_save.connect(pre_save_email_activation, sender=EmailActivation)
+
+
+def post_save_create_user_receiver(instance, sender, created, *args, **kwargs):
+    if created:
+        activation_object = EmailActivation.objects.create(instance)
+        activation_object.send_activation()
+
+
+post_save.connect(post_save_create_user_receiver, sender=EmailActivation)
