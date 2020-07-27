@@ -1,8 +1,14 @@
+from random import randint
+
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from django.conf import settings
+from ecom.utils import random_string_generator
 
 # Create your models here.
+from django.template.loader import get_template
 
 
 class UserManager(BaseUserManager):
@@ -98,3 +104,30 @@ class EmailActivation(models.Model):
 
     def __str__(self):
         return self.email
+
+    def send_activation(self):
+        if self.key:
+            context = {
+                'path': '',
+                'email': self.email
+            }
+
+            verify_text = get_template('registration/emails/verify.txt').render(context)
+            verify_page_html = get_template('registration/emails/verify.html').render(context)
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [self.email, from_email]
+            verify_mail = send_mail(
+                subject='',
+                message=verify_text,
+                from_email='',
+                recipient_list='',
+                html_message=verify_page_html,
+                fail_silently=False
+            )
+            return verify_mail
+
+
+def pre_save_email_activation(sender, instance, *args, **kwargs):
+    if not instance.key:
+        key_length = randint(30, 45)
+        key = random_string_generator(size=key_length)
