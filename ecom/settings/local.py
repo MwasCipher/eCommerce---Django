@@ -64,6 +64,8 @@ MAILCHIMP_API_KEY = '8c31ff27ffbe58eb7caf1a6e20a94a07-us18'
 MAILCHIMP_DATA_CENTER = 'us18'
 MAILCHIMP_EMAIL_LIST_ID = 'd8deece3ab'
 
+BASE_URL = '127.0.0.1:8000'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

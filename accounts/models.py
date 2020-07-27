@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 from django.conf import settings
-from ecom.utils import random_string_generator
+from ecom.utils import random_string_generator, unique_verification_key_generator
 
 # Create your models here.
 from django.template.loader import get_template
@@ -97,7 +97,7 @@ class EmailActivation(models.Model):
     email = models.EmailField()
     key = models.CharField(max_length=120, null=True, blank=True)
     activated = models.BooleanField(default=False)
-    forced_expired = models.BooleanField(default=False)
+    forced_expire = models.BooleanField(default=False)
     expires = models.IntegerField(default=7)  # Expires in 7 Days
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -105,29 +105,48 @@ class EmailActivation(models.Model):
     def __str__(self):
         return self.email
 
-    def send_activation(self):
-        if self.key:
-            context = {
-                'path': '',
-                'email': self.email
-            }
+    def regenerate(self):
+        self.key = None
+        self.save()
+        if self.key is not None:
+            return False
+        return True
 
-            verify_text = get_template('registration/emails/verify.txt').render(context)
-            verify_page_html = get_template('registration/emails/verify.html').render(context)
-            from_email = settings.EMAIL_HOST_USER
-            recipient_list = [self.email, from_email]
-            verify_mail = send_mail(
-                subject='',
-                message=verify_text,
-                from_email='',
-                recipient_list='',
-                html_message=verify_page_html,
-                fail_silently=False
-            )
-            return verify_mail
+    def send_activation(self):
+        base_url = getattr(settings, 'BASE_URL')
+        path_key = self.key
+        path = '{base_url}{path}'.format(base_url=base_url, path=path_key)
+        if not self.activated and not self.forced_expire:
+
+            if self.key:
+                context = {
+                    'path': '',
+                    'email': self.email
+                }
+
+                verify_text = get_template('registration/emails/verify.txt').render(context)
+                verify_page_html = get_template('registration/emails/verify.html').render(context)
+                from_email = settings.EMAIL_HOST_USER
+                recipient_list = [self.email, from_email]
+                verify_mail = send_mail(
+                    subject='',
+                    message=verify_text,
+                    from_email='',
+                    recipient_list='',
+                    html_message=verify_page_html,
+                    fail_silently=False
+                )
+                return verify_mail
+
+        return False
 
 
 def pre_save_email_activation(sender, instance, *args, **kwargs):
-    if not instance.key:
-        key_length = randint(30, 45)
-        key = random_string_generator(size=key_length)
+    if not instance.activated and not instance.forced_expire:
+        if not instance.key:
+            # key_length = randint(30, 45)
+            # key = random_string_generator(size=key_length)
+            # qs = EmailActivation.objects.filter(key__iexact=key)
+            # if qs.exists():
+            #     key = random_string_generator(size=key_length)
+            instance.key = unique_verification_key_generator(instance)

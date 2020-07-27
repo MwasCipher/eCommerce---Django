@@ -50,3 +50,18 @@ def unique_slug_generator(instance, new_slug=None):
         )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
+
+
+def unique_verification_key_generator(instance):
+    """
+    This is for a Django project and it assumes your instance
+    has a model with a key field
+    """
+    key_length = random.randint(30, 45)
+    new_verification_key = random_string_generator(size=key_length).upper()
+
+    Klass = instance.__class__
+    qs_exists = Klass.objects.filter(key=new_verification_key).exists()
+    if qs_exists:
+        return unique_slug_generator(instance)
+    return new_verification_key
