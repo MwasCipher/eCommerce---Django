@@ -84,3 +84,17 @@ class GuestEmail(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class EmailActivation(models.Model):
+    user = models.ForeignKey(User)
+    email = models.EmailField()
+    key = models.CharField(max_length=120, null=True, blank=True)
+    activated = models.BooleanField(default=False)
+    forced_expired = models.BooleanField(default=False)
+    expires = models.IntegerField(default=7)  # Expires in 7 Days
+    timestamp = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.email

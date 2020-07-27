@@ -83,7 +83,6 @@ class LoginView(FormView):
                 return redirect('index')
         return super(LoginView, self).form_invalid(form)
 
-
 #
 # def login_page(request):
 #     form = LoginForm(request.POST or None)
