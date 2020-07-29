@@ -10,6 +10,8 @@ from ecom.utils import random_string_generator, unique_verification_key_generato
 
 # Create your models here.
 from django.template.loader import get_template
+from datetime import timedelta
+from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
@@ -93,6 +95,20 @@ class GuestEmail(models.Model):
         return self.email
 
 
+class EmailActivationQueryset(models.query.QuerySet):
+    def confirmable(self):
+        return self.filter(
+            activated=False,
+            forced_expire=False
+        )
+
+
+class EmailActivationManager(models.Manager):
+    def get_queryset(self):
+        current_date_time = timezone.now()
+        return EmailActivationQueryset(self.model, using=self._db)
+
+
 class EmailActivation(models.Model):
     user = models.ForeignKey(User)
     email = models.EmailField()
@@ -102,6 +118,8 @@ class EmailActivation(models.Model):
     expires = models.IntegerField(default=7)  # Expires in 7 Days
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    objects = EmailActivationManager()
 
     def __str__(self):
         return self.email
@@ -158,8 +176,8 @@ pre_save.connect(pre_save_email_activation, sender=EmailActivation)
 
 def post_save_create_user_receiver(instance, sender, created, *args, **kwargs):
     if created:
-        activation_object = EmailActivation.objects.create(instance)
+        activation_object = EmailActivation.objects.create(user=instance, email=instance.email)
         activation_object.send_activation()
 
 
-post_save.connect(post_save_create_user_receiver, sender=EmailActivation)
+post_save.connect(post_save_create_user_receiver, sender=User)
