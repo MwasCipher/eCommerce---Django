@@ -5,6 +5,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.utils.http import is_safe_url
 from django.contrib import messages
+from django.views import View
+
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
 from .signals import user_logged_in_signal
@@ -29,7 +31,7 @@ class UserProfile(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return self.request.user
 
-
+class AccountActivationView(View):
 def register_guest(request):
     form = GuestForm(request.POST or None)
 

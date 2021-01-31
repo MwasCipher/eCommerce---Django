@@ -107,13 +107,17 @@ class EmailActivationQueryset(models.query.QuerySet):
             activated=False,
             forced_expire=False
         ).filter(
-            timestamp__gt=start_date
+            timestamp__gt=start_date,
+            timestamp__lte=expiry_date
         )
 
 
 class EmailActivationManager(models.Manager):
     def get_queryset(self):
         return EmailActivationQueryset(self.model, using=self._db)
+
+    def confirmable(self):
+        return self.get_queryset().confirmable()
 
 
 class EmailActivation(models.Model):
@@ -131,6 +135,23 @@ class EmailActivation(models.Model):
     def __str__(self):
         return self.email
 
+    def can_activate(self):
+        qs = EmailActivation.objects.filter(pk=self.pk).confirmable()
+        if qs.exists():
+            return True
+        return False
+
+    def activate(self):
+        if self.can_activate():
+            user = self.user
+            user.is_active = True
+            user.save()
+            self.activated = True
+            self.save()
+            return True
+        return False
+
+
     def regenerate(self):
         self.key = None
         self.save()
@@ -146,15 +167,16 @@ class EmailActivation(models.Model):
 
             if self.key:
                 context = {
-                    'path': '',
+                    'path': path,
                     'email': self.email
                 }
+                key = random_string_generator(size=45)
 
                 verify_text = get_template('registration/emails/verify.txt').render(context)
                 verify_page_html = get_template('registration/emails/verify.html').render(context)
-                from_email = settings.EMAIL_HOST_USER
+                from_email = settings.DEFAULT_FROM_EMAIL
                 email_subject = 'One Click Email Activation'
-                recipient_list = [self.email, from_email]
+                recipient_list = [self.email]
                 verify_mail = send_mail(
                     subject=email_subject,
                     message=verify_text,
