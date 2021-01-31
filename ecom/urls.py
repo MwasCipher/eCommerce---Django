@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^cart/', include('carts.urls')),
     url(r'^billing/', include('billing.urls')),
     url(r'^marketing/', include('marketing.urls')),
-    url(r'^account/', include('accounts.urls')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('accounts.passwords.urls')),
     # url(r'^accounts/', RedirectView.as_view(url='/account')),
     # url(r'^settings/', RedirectView.as_view(url='/account')),

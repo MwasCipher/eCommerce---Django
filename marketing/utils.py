@@ -48,11 +48,11 @@ class MailChimp(object):
         request_object = requests.get(endpoint, auth=('', self.key))
         return request_object.status_code, request_object.json()
 
-    def check_valid_status(self, status):
-        choices = ['subscribed', 'unsubscribed', 'pending', 'cleaned']
-        if status not in choices:
-            raise ValueError('Not A Valid Choice For Email Status')
-        return status
+    # def check_valid_status(self, status):
+    #     choices = ['subscribed', 'unsubscribed', 'pending', 'cleaned']
+    #     if status not in choices:
+    #         raise ValueError('Not A Valid Choice For Email Status')
+    #     return status
 
     def add_email(self, email):
         status = 'subscribed'

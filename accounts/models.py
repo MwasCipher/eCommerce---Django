@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
         user_object.set_password(password)
         user_object.staff = is_staff
         user_object.admin = is_admin
-        user_object.active = is_active
+        user_object.is_active = is_active
         user_object.save(using=self._db)
         return user_object
 
@@ -95,17 +95,24 @@ class GuestEmail(models.Model):
         return self.email
 
 
+DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS')
+
+
 class EmailActivationQueryset(models.query.QuerySet):
     def confirmable(self):
+        current_date_time = timezone.now()
+        start_date = current_date_time - timedelta(days=DEFAULT_ACTIVATION_DAYS)
+        expiry_date = current_date_time
         return self.filter(
             activated=False,
             forced_expire=False
+        ).filter(
+            timestamp__gt=start_date
         )
 
 
 class EmailActivationManager(models.Manager):
     def get_queryset(self):
-        current_date_time = timezone.now()
         return EmailActivationQueryset(self.model, using=self._db)
 
 
@@ -146,12 +153,13 @@ class EmailActivation(models.Model):
                 verify_text = get_template('registration/emails/verify.txt').render(context)
                 verify_page_html = get_template('registration/emails/verify.html').render(context)
                 from_email = settings.EMAIL_HOST_USER
+                email_subject = 'One Click Email Activation'
                 recipient_list = [self.email, from_email]
                 verify_mail = send_mail(
-                    subject='',
+                    subject=email_subject,
                     message=verify_text,
-                    from_email='',
-                    recipient_list='',
+                    from_email=from_email,
+                    recipient_list=recipient_list,
                     html_message=verify_page_html,
                     fail_silently=False
                 )

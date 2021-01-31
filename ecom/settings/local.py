@@ -65,6 +65,17 @@ MAILCHIMP_DATA_CENTER = 'us18'
 MAILCHIMP_EMAIL_LIST_ID = 'd8deece3ab'
 
 BASE_URL = '127.0.0.1:8000'
+DEFAULT_ACTIVATION_DAYS = 2
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mwangiwawerucollins@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_DEFAULT_EMAIL = 'Collins Mwangi <mwangiwawerucollins@gmail.com>'
+
+Managers = (
+    ('Collins Mwangi', 'mwangiwawerucollins@gmail.com')
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
