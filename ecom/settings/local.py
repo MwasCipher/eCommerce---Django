@@ -72,10 +72,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_DEFAULT_EMAIL = 'Collins Mwangi <mwangiwawerucollins@gmail.com>'
 
-Managers = (
+MANAGERS = (
     ('Collins Mwangi', 'mwangiwawerucollins@gmail.com')
 )
-
+ADMINS = MANAGERS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
