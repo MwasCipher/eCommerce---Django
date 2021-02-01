@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save
+from django.core.urlresolvers import reverse
+from django.db.models import Q
 from ecom.utils import random_string_generator, unique_verification_key_generator
 
 # Create your models here.
@@ -119,6 +121,9 @@ class EmailActivationManager(models.Manager):
     def confirmable(self):
         return self.get_queryset().confirmable()
 
+    def email_exists(self, email):
+        return self.get_queryset().filter(Q(email=email) | Q(user__email=email)).filter(activated=False)
+
 
 class EmailActivation(models.Model):
     user = models.ForeignKey(User)
@@ -151,7 +156,6 @@ class EmailActivation(models.Model):
             return True
         return False
 
-
     def regenerate(self):
         self.key = None
         self.save()
@@ -161,7 +165,7 @@ class EmailActivation(models.Model):
 
     def send_activation(self):
         base_url = getattr(settings, 'BASE_URL')
-        path_key = self.key
+        path_key = reverse('email_activate', kwargs={'key': self.key})
         path = '{base_url}{path}'.format(base_url=base_url, path=path_key)
         if not self.activated and not self.forced_expire:
 
