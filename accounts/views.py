@@ -31,7 +31,15 @@ class UserProfile(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return self.request.user
 
-class AccountActivationView(View):
+
+class AccountEmailActivationView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'registration/activation_error.html', {})
+
+    def post(self, *args, **kwargs):
+        pass
+
+
 def register_guest(request):
     form = GuestForm(request.POST or None)
 
@@ -84,6 +92,7 @@ class LoginView(FormView):
             else:
                 return redirect('index')
         return super(LoginView, self).form_invalid(form)
+
 
 #
 # def login_page(request):
