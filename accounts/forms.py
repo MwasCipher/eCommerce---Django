@@ -95,6 +95,11 @@ class LoginForm(forms.Form):
         email = data.get('email')
         password = data.get('password')
 
+        link = 'resend_activation'
+        resend_confirmation_msg = """
+        Click <a href='{resend_link}' >Here </a>To Resend Activation Link
+        """.format(link)
+
         qs = User.objects.filter(email=email)
         if qs.exists():
 
@@ -104,11 +109,12 @@ class LoginForm(forms.Form):
                 confirm_email = EmailActivation.objects.filter(email=email)
                 is_confirmable = confirm_email.confirmable().exists()
                 if is_confirmable:
-                    raise forms.ValidationError("Please Check Your email To Confirm Your Account!!! "
-                                                "Do You Want To Resend Activation")
+                    resend_msg = "Please Check Your email To Confirm Your Account!!! " \
+                                 + mark_safe(resend_confirmation_msg)
+                    raise forms.ValidationError(resend_msg)
                 confirm_email_exists = EmailActivation.objects.email_exists(email).exists()
                 if confirm_email_exists:
-                    raise forms.ValidationError("Click Here To Resend Activation Link")
+                    raise forms.ValidationError(mark_safe(resend_confirmation_msg))
                 if not is_confirmable and not confirm_email_exists:
                     raise forms.ValidationError("This User Is InActive!!!")
 
