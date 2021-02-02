@@ -8,9 +8,9 @@ from django.contrib import messages
 from django.views import View
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, UpdateView
 
-from .forms import LoginForm, RegisterForm, GuestForm, EmailReactivationForm
+from .forms import LoginForm, RegisterForm, GuestForm, EmailReactivationForm, UserDetailsUpdateForm
 from .models import GuestEmail, EmailActivation
 from .signals import user_logged_in_signal
 from django.views.generic import CreateView, FormView, DetailView
@@ -190,6 +190,19 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'register.html'
     success_url = '/accounts/login/'
+
+
+class UserDetailsUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = UserDetailsUpdateForm
+    template_name = 'base/forms.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserDetailsUpdateView, self).get_context_data(*args, **kwargs)
+        context['title'] = 'Change User Details'
+        return context
 
 # def register_page(request):
 #     form = RegisterForm(request.POST or None)

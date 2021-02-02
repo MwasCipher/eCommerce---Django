@@ -200,3 +200,12 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserDetailsUpdateForm(forms.ModelForm):
+    full_name = forms.CharField(label='Name', required=False)
+    class Meta:
+        model = User
+        fields = [
+            'full_name'
+        ]
