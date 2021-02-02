@@ -14,7 +14,7 @@ from .forms import LoginForm, RegisterForm, GuestForm, EmailReactivationForm
 from .models import GuestEmail, EmailActivation
 from .signals import user_logged_in_signal
 from django.views.generic import CreateView, FormView, DetailView
-from ecom.mixins import NexUrlMixin, RequestAttachFormMixin
+from ecom.mixins import NextUrlMixin, RequestAttachFormMixin
 from django.core.mail import send_mail
 from django.template.loader import get_template
 
@@ -99,27 +99,45 @@ class AccountEmailActivationView(FormMixin, View):
         return render(self.request, 'registration/activation_error.html', context)
 
 
-def register_guest(request):
-    form = GuestForm(request.POST or None)
+# def register_guest(request):
+#     form = GuestForm(request.POST or None)
+#
+#     next_ = request.GET.get('next')
+#     next_post = request.POST.get('next')
+#     redirect_path = next_ or next_post or None
+#
+#     if form.is_valid():
+#         email = form.cleaned_data.get('email')
+#         new_guest_email = GuestEmail.objects.create(email=email)
+#         request.session['guest_email_id'] = new_guest_email.id
+#
+#         if is_safe_url(redirect_path, request.get_host()):
+#             return redirect(redirect_path)
+#         else:
+#             return redirect('register')
+#
+#     return redirect('register')
 
-    next_ = request.GET.get('next')
-    next_post = request.POST.get('next')
-    redirect_path = next_ or next_post or None
 
-    if form.is_valid():
-        email = form.cleaned_data.get('email')
-        new_guest_email = GuestEmail.objects.create(email=email)
-        request.session['guest_email_id'] = new_guest_email.id
+class GuestRegisterView(NextUrlMixin, RequestAttachFormMixin, CreateView):
+    form_class = GuestForm
+    default_next = '/register/'
 
-        if is_safe_url(redirect_path, request.get_host()):
-            return redirect(redirect_path)
-        else:
-            return redirect('register')
+    def get_success_url(self):
+        return self.get_next_url()
 
-    return redirect('register')
+    def form_invalid(self, form):
+        return redirect(self.default_next)
+
+    # def form_valid(self, form):
+    #     request = self.request
+    #     email = form.cleaned_data.get('email')
+    #     new_guest_email = GuestEmail.objects.create(email=email)
+    #     request.session['guest_email_id'] = new_guest_email.id
+    #     return redirect(self.get_next_url())
 
 
-class LoginView(NexUrlMixin, RequestAttachFormMixin, FormView):
+class LoginView(NextUrlMixin, RequestAttachFormMixin, FormView):
     form_class = LoginForm
     template_name = 'login.html'
     default_next = '/'
@@ -128,6 +146,7 @@ class LoginView(NexUrlMixin, RequestAttachFormMixin, FormView):
         request = self.request
         next_path = self.get_next_url()
         return redirect(next_path)
+
 
 #
 # def login_page(request):

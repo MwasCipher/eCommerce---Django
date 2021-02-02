@@ -6,7 +6,7 @@ class RequestAttachFormMixin(object):
         print(kwargs)
         kwargs['request'] = self.request
         return kwargs
-class NexUrlMixin(object):
+class NextUrlMixin(object):
 
     def get_next_url(self):
         default_next = 'index'
