@@ -1,11 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from .models import EmailActivation
+from .signals import user_logged_in_signal
 
 User = get_user_model()
 
@@ -83,6 +84,48 @@ class LoginForm(forms.Form):
                                                             'name': 'email', 'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'name': 'password',
                                                                  'class': 'form-control'}))
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(LoginForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        request = self.request
+        data = self.cleaned_data
+        email = data.get('email')
+        password = data.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is None:
+            raise forms.ValidationError("Incorrect Credentials!!!")
+        login(request, user)
+        self.user = user
+        user_logged_in_signal.send(user.__class__, instance=user, request=request)
+
+        try:
+            del request.session['guest_email_id']
+        except:
+            pass
+
+    # def form_valid(self, form):
+    #     msg = """
+    #     Activation Link Sent To Your Email. Check Your Email To Confirm Account.
+    #
+    #     """
+    #     request = self.request
+    #     messages.success(request, mark_safe(msg))
+    #     email = form.cleaned_data.get('email')
+    #     obj = EmailActivation.objects.email_exists(email).first()
+    #     user = obj.user
+    #     new_activation = EmailActivation.objects.create(user=user, email=email)
+    #     new_activation.send_activation()
+    #     return AccountEmailActivationView
+    #
+    # def form_invalid(self, form):
+    #     context = {
+    #         'form': form,
+    #         'key': self.key
+    #     }
+    #     return render(self.request, 'registration/activation_error.html', context)
 
 
 class RegisterForm(forms.ModelForm):

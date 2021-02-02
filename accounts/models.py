@@ -165,7 +165,7 @@ class EmailActivation(models.Model):
 
     def send_activation(self):
         base_url = getattr(settings, 'BASE_URL')
-        path_key = reverse('email_activate', kwargs={'key': self.key})
+        path_key = reverse('email-activate', kwargs={'key': self.key})
         path = '{base_url}{path}'.format(base_url=base_url, path=path_key)
         if not self.activated and not self.forced_expire:
 

@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^settings/', RedirectView.as_view(url='/account')),
     url(r'^email/confirm/(?P<key>[0-9A-Za-z]+)/',
         AccountEmailActivationView.as_view(), name='email-activate'),
+    url(r'^email/resend-activation/',
+        AccountEmailActivationView.as_view(), name='resend-activation'),
 ]
