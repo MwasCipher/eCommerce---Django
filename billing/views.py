@@ -29,8 +29,8 @@ def stripe_payment_view(request):
         next_url = next_
 
     context = {
-        'public_key': STRIPE_PUBLIC_KEY,
-        'next_url': next_url,
+        'publish_key': STRIPE_PUBLIC_KEY,
+        'next_url': next_url
 
     }
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def stripe_payment_view(request):
 
 def create_payment(request):
     context = {
-        'public_key': STRIPE_PUBLIC_KEY,
+        'publish_key': STRIPE_PUBLIC_KEY,
 
     }
     if request.method == 'POST' and request.is_ajax():

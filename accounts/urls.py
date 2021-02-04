@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
+from products.views import UserProductHistoryView
 from .views import GuestRegisterView, RegisterView, LoginView, UserProfile, AccountEmailActivationView, \
     UserDetailsUpdateView
 
@@ -10,6 +11,7 @@ urlpatterns = [
     url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^details/$', UserDetailsUpdateView.as_view(), name='update-user-details'),
     url(r'^register/guest/$', GuestRegisterView.as_view(), name='register_guest'),
+    url(r'^products/history/$', UserProductHistoryView.as_view(), name='products-history'),
     url(r'^$', UserProfile.as_view(), name='profile'),
     url(r'^accounts/', RedirectView.as_view(url='account')),
     url(r'^settings/', RedirectView.as_view(url='/account')),

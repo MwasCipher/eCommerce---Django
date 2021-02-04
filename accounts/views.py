@@ -194,7 +194,7 @@ class RegisterView(CreateView):
 
 class UserDetailsUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserDetailsUpdateForm
-    template_name = 'base/forms.html'
+    template_name = 'update_profile.html'
 
     def get_object(self, queryset=None):
         return self.request.user

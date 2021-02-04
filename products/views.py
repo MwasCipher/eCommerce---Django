@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from analytics.mixins import ObjectViewedMixin
 
 # Create your views here.
@@ -134,3 +135,21 @@ def product_detail_view(request, pk, *args, **kwargs):
         'product': product
     }
     return render(request, 'products/detail.html', context)
+
+
+class UserProductHistoryView(LoginRequiredMixin, ListView):
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductListView, self).get_context_data(*args, **kwargs)
+        request = self.request
+        cart_object, new_object = Cart.objects.new_or_getcurrent(request)
+        context['cart'] = cart_object
+        return context
+
+    # queryset = Product.objects.all()
+    # Custom Model Manager
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        all_objects_viewed = request.user.objectviewed_set.all().filter(content_type='product')
+        products_viewed_IDS = [x.object_id for x in all_objects_viewed]
+        return Product.objects.filter(pk__in=products_viewed_IDS)

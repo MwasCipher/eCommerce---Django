@@ -89,7 +89,7 @@ class GuestForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        obj = super(UserAdminCreationForm, self).save(commit=False)
+        obj = super(GuestForm, self).save(commit=False)
         if commit:
             obj.save()
             request = self.request
@@ -203,7 +203,7 @@ class RegisterForm(forms.ModelForm):
 
 
 class UserDetailsUpdateForm(forms.ModelForm):
-    full_name = forms.CharField(label='Name', required=False)
+    full_name = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={"class": 'form-control'}))
     class Meta:
         model = User
         fields = [
