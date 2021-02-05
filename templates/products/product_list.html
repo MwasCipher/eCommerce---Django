@@ -2,27 +2,24 @@
 
 
 {% block content %}
-<div class="container">
+<!--<div class="container">-->
     <div class="row">
         {% for product in product_list %}
-            <div class="col">
-                {% include 'products/snippets/card.html' %}
+            <div class="col-12">
+                {% include 'products/snippets/card.html' with instance=product %}
 
-
-                {% if forloop.counter|divisibleby:3 %}
-                    </div></div> <div class="row"><div class="col-12"><hr/></div>
-                {% elif forloop.counter|divisibleby:2 %}
-                    </div></div> <div class="row"><div class="col-12"><hr/></div>
-                {% else %}
-                    </div>
-                {% endif %}
-
-
+<!--                {% if forloop.counter|divisibleby:3 %}-->
+<!--                    </div></div> <div class="row"><div class="col-12"><hr/></div>-->
+<!--                {% elif forloop.counter|divisibleby:2 %}-->
+<!--                    </div></div> <div class="row"><div class="col-12"><hr/></div>-->
+<!--                {% else %}-->
+<!--                    </div>-->
+<!--                {% endif %}-->
 
             </div>
         {% endfor %}
     </div>
-</div>
+<!--</div>-->
 
 
 

@@ -113,7 +113,7 @@ class LoginForm(forms.Form):
         email = data.get('email')
         password = data.get('password')
 
-        link = 'resend_activation'
+        link = 'resend-activation'
         resend_confirmation_msg = """
         Click <a href='{resend_link}' >Here </a>To Resend Activation Link
         """.format(link)

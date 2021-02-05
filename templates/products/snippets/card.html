@@ -11,6 +11,7 @@
               </h2>
             </div>
             <div class="card-body">
+             <span class="badge badge-secondary text-white">{{ product.title }}</span>
              <p class="card-text">{{ product.description | truncatewords:14}}</p>
 
               <div class="row py-2 text-secondary">
@@ -20,14 +21,18 @@
 
               <hr>
                 <div class="row">
-                    <div class="col-6 col-md-6">
-                        <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-block">More Info</a>
-                    </div>
-                    <div class="col-4 col-md-6">
-                        {% include 'products/snippets/update_cart.html' with product=product cart=cart %}
-                    </div>
+
+                        <div class="col-6 col-md-6">
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-block">More Info</a>
+                        </div>
+
+                        <div class="col-4 col-md-6">
+                            {% include 'products/snippets/update_cart.html' with product=product cart=cart %}
+                        </div>
+
                 </div>
 
             </div>
           </div>
         </div>
+

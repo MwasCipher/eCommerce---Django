@@ -29,6 +29,7 @@ class ProductFeaturedDetailView(ObjectViewedMixin, DetailView):
 
 # Class Based View
 class ProductListView(ListView):
+    template_name = 'products/product_list.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(*args, **kwargs)
@@ -138,9 +139,10 @@ def product_detail_view(request, pk, *args, **kwargs):
 
 
 class UserProductHistoryView(LoginRequiredMixin, ListView):
+    template_name = 'products/history.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ProductListView, self).get_context_data(*args, **kwargs)
+        context = super(UserProductHistoryView, self).get_context_data(*args, **kwargs)
         request = self.request
         cart_object, new_object = Cart.objects.new_or_getcurrent(request)
         context['cart'] = cart_object
@@ -150,6 +152,6 @@ class UserProductHistoryView(LoginRequiredMixin, ListView):
     # Custom Model Manager
     def get_queryset(self, *args, **kwargs):
         request = self.request
-        all_objects_viewed = request.user.objectviewed_set.all().filter(content_type='product')
-        products_viewed_IDS = [x.object_id for x in all_objects_viewed]
-        return Product.objects.filter(pk__in=products_viewed_IDS)
+        all_objects_viewed = request.user.objectviewed_set.by_model(Product)
+        # products_viewed_IDS = [x.object_id for x in all_objects_viewed]
+        return all_objects_viewed

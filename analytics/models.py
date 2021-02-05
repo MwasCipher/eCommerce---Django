@@ -15,6 +15,20 @@ from .utils import get_user_ip
 User = settings.AUTH_USER_MODEL
 
 
+class ObjectViewedQuerySet(models.query.QuerySet):
+    def by_model(self, model_class):
+        con_type = ContentType.objects.get_for_model(model_class)
+        return self.filter(content_type=con_type)
+
+
+class ObjectViewedManager(models.Manager):
+    def get_queryset(self):
+        return ObjectViewedQuerySet(self.model, using=self._db)
+
+    def by_model(self, model_class):
+        return self.get_queryset().by_model(model_class)
+
+
 class ObjectViewed(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
     ip_address = models.CharField(max_length=255, blank=True, null=True)
@@ -22,6 +36,8 @@ class ObjectViewed(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = ObjectViewedManager()
 
     def __str__(self):
         return "%s Viewed %s" % (self.content_object, self.timestamp)
@@ -33,7 +49,7 @@ class ObjectViewed(models.Model):
 
 
 def object_viewed_receiver(sender, instance, request, *args, **kwargs):
-    con_type = ContentType.objects.get_for_model(sender)
+    con_type = ContentType.objects.get_for_model(sender)  # Content Type
 
     ObjectViewed.objects.create(user=request.user, object_id=instance.id, content_type=con_type,
                                 ip_address=get_user_ip(request))
